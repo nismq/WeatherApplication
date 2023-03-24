@@ -1,0 +1,84 @@
+<div id="title">
+  <h1  >Weather Data</h1>
+  <p>This view shows daily weather data for given month and location.</p>
+</div>
+
+<!--Buttons for selecting month, year and location-->
+<div  id="dataSelectRow"> 
+  <div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+      Select month: {{month}}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button (click)="changeMonth('1')" ngbDropdownItem>1</button>
+      <button (click)="changeMonth('2')" ngbDropdownItem>2</button>
+      <button (click)="changeMonth('3')" ngbDropdownItem>3</button>
+      <button (click)="changeMonth('4')" ngbDropdownItem>4</button>
+      <button (click)="changeMonth('5')" ngbDropdownItem>5</button>
+      <button (click)="changeMonth('6')" ngbDropdownItem>6</button>
+      <button (click)="changeMonth('7')" ngbDropdownItem>7</button>
+      <button (click)="changeMonth('8')" ngbDropdownItem>8</button>
+      <button (click)="changeMonth('9')" ngbDropdownItem>9</button>
+      <button (click)="changeMonth('10')" ngbDropdownItem>10</button>
+      <button (click)="changeMonth('11')" ngbDropdownItem>11</button>
+      <button (click)="changeMonth('12')" ngbDropdownItem>12</button>
+    </div>
+  </div>
+
+  <div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+      Select year: {{year}}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button (click)="changeYear(2012)" ngbDropdownItem>2012</button>
+      <button (click)="changeYear(2013)" ngbDropdownItem>2013</button>
+      <button (click)="changeYear(2014)" ngbDropdownItem>2014</button>
+      <button (click)="changeYear(2015)" ngbDropdownItem>2015</button>
+      <button (click)="changeYear(2016)" ngbDropdownItem>2016</button>
+      <button (click)="changeYear(2017)" ngbDropdownItem>2017</button>
+      <button (click)="changeYear(2018)" ngbDropdownItem>2018</button>
+      <button (click)="changeYear(2019)" ngbDropdownItem>2019</button>
+      <button (click)="changeYear(2020)" ngbDropdownItem>2020</button>
+      <button (click)="changeYear(2021)" ngbDropdownItem>2021</button>
+      <button (click)="changeYear(2022)" ngbDropdownItem>2022</button>
+      <button (click)="changeYear(2023)" ngbDropdownItem>2023</button>
+    </div>
+  </div>
+  <div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn btn-outline-primary" *ngIf="currentLocation" ngbDropdownToggle>
+      Select location: {{currentLocation.localityName}}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button *ngFor="let item of locations" (click)="changeLocation(item)" ngbDropdownItem>{{item.localityName}}</button>
+    </div>
+  </div>
+</div>
+ 
+<!--Modal window for adding and editing weather data-->
+<p *ngIf="!weatherData?.length"><em>Loading...</em></p>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{weatherSelection.day.substring(0,10)}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
+  </div>
+  <app-add-edit-data [weatherSelection]="weatherSelection"></app-add-edit-data>
+
+</ng-template>
+
+<!--Show weather data-->
+<div *ngIf="weatherData.length">
+  <div *ngFor="let item of weatherData" class="dataCard">
+    <h5>{{item.day.substring(0,10)}}</h5>
+    <p>Temperature: {{item.temperature}}</p>
+    <p>Rainfall: {{item.rainfall}}</p>
+    <p>Wind Speed: {{item.windSpeed}}</p>
+    <button type="button" class="btn btn-primary" (click)="openModal(content,item)" *ngIf="!item.isEmpty">
+      Edit
+    </button>
+    <button type="button" class="btn btn-success" (click)="openModal(content,item)" *ngIf="item.isEmpty">
+      Add
+    </button>
+  </div>
+</div>
+
+

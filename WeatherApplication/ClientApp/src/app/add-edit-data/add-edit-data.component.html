@@ -1,0 +1,27 @@
+<!--Content for data adding and editing modal-->
+<div class="modal-body">
+  <label class="col-sm-2 col-form-label">Temperature</label>
+  <div class="col-sm-10">
+    <input type="number" class="form-control" [(ngModel)]="temperature"
+           placeholder="Enter temperature"/>
+    <h6 class="text-danger" *ngIf="temperature == null">Enter temperature</h6>
+  </div>
+  <label class="col-sm-2 col-form-label">Rainfall</label>
+  <div class="col-sm-10">
+    <input type="number" class="form-control" [(ngModel)]="rainfall"
+           placeholder="Enter rainfall" />
+  </div>
+  <label class="col-sm-10 col-form-label" >Wind Speed</label>
+  <div class="col-sm-10">
+    <input type="number" class="form-control" [(ngModel)]="windSpeed"
+           placeholder="Enter wind speed" />
+    <h6 class="text-danger" *ngIf="windSpeed % 1 != 0 && windSpeed != null">Wind speed must be an integer</h6>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" *ngIf="!weatherSelection.isEmpty" (click)="updateData()">Update</button>
+  <button type="button" class="btn btn-outline-dark" *ngIf="weatherSelection.isEmpty" (click)="addNewData()">Add</button>
+  <button type="button" class="btn btn-outline-danger" *ngIf="!weatherSelection.isEmpty" (click)="deleteData()">Delete</button>
+</div>
+
+

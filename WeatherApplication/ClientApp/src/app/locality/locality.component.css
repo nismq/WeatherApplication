@@ -1,0 +1,12 @@
+#title {
+  margin: 20px auto 20px auto;
+  width: fit-content;
+  display: flexbox;
+  justify-content: center;
+}
+
+  #title > * {
+    width: fit-content;
+    margin: auto;
+    justify-content: center;
+  }

@@ -1,0 +1,35 @@
+<div id="title">
+  <h1 >Locations</h1>
+</div>
+
+
+
+<div>
+  <h6 style="font-weight:bold">Enter new location</h6>
+  <div style="display:flex">
+    <input type="text" class="form-control" placeholder="Location name" [(ngModel)]="newLocation" />
+    <button type="button" class="btn btn-success" (click)="addNewLocation()">
+      Add
+    </button>
+  </div>
+</div>
+
+<p *ngIf="!localities?.length"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="localities.length">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let locality of localities">
+      <td>{{ locality.localityName }}</td>
+      <td style="width:100px">
+        <button type="button" class="btn btn-outline-danger" style="width:fit-content" (click)="deleteLocation(locality)">Delete</button>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
